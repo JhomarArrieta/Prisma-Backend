@@ -15,6 +15,11 @@ services:
       
     environment:
       POSTGRES_PASSWORD: example
+      POSTGRES_DB : appdb
+      POSTGRES_USER : admin 
+      DB_USER: app_user
+      DB_PASSWORD: myapppawd
+      DB_NAME: appdb
     ports: 
       - 5434:5432
 
@@ -31,8 +36,8 @@ services:
     depends_on:
       - db
     environment:
-      - DB_PASSWORD=example
+      - DB_PASSWORD=myapppawd
+      - DB_USER=app_user
       - DB_HOST=db
+      - DB_NAME=appdb
       - DB_PORT=5432
-
-
