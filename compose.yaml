@@ -29,10 +29,10 @@ services:
       context: .
       dockerfile: Dockerfile
     depends_on:
-      -db
+      - db
     environment:
       - DB_PASSWORD=example
       - DB_HOST=db
-      - DB_PORT=5434
+      - DB_PORT=5432
 
 
