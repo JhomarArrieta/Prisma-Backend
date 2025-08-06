@@ -1,0 +1,44 @@
+package com.talentotech.prisma.backend.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.talentotech.prisma.backend.dto.PreferenciasDTO;
+import com.talentotech.prisma.backend.services.PreferenciaService;
+
+import jakarta.validation.Valid;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+@RestController
+public class PreferenciasController {
+
+    @Autowired
+    private PreferenciaService preferenciaService;
+
+    @PostMapping("/preferencias")
+    public ResponseEntity<PreferenciasDTO> ingresarPreferencias(@Valid @RequestBody PreferenciasDTO preferenciasDTO) {
+        PreferenciasDTO guardada = preferenciaService.save(preferenciasDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(guardada);
+    }
+
+    @GetMapping("/{id_usuario}/preferencias")
+    public ResponseEntity<List<PreferenciasDTO>> getPreferenciasByUsuario(@PathVariable long id) {
+        return ResponseEntity.ok(preferenciaService.findPreferenciasByUsuario(id));
+    }
+
+    @GetMapping("/preferencias")
+    public ResponseEntity<List<PreferenciasDTO>> obtenerPreferencias() {
+        List<PreferenciasDTO> preferencias = preferenciaService.findAll();
+        return ResponseEntity.ok(preferencias);
+    }
+    
+    
+}

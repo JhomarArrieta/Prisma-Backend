@@ -1,12 +1,8 @@
 package com.talentotech.prisma.backend.services.Impl;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.talentotech.prisma.backend.dto.PreferenciasDTO;
 import com.talentotech.prisma.backend.dto.UsuarioDTO;
 import com.talentotech.prisma.backend.entities.Preferencias;
@@ -20,8 +16,18 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @Autowired
     private UsuarioDao usuarioDao;
+
+    @Autowired
     private PreferenciasDao preferenciasDao;
     
+    public PreferenciasDTO convertToDTOP(Preferencias preferencias){
+        PreferenciasDTO preferenciasDTO = new PreferenciasDTO();
+        preferenciasDTO.setDiferencia_edad(preferencias.getDiferencia_edad());
+        preferenciasDTO.setHijos(preferencias.getHijos());
+        preferenciasDTO.setTipo_relacion(preferencias.getTipo_relacion());
+        return preferenciasDTO;
+    }
+
     public static UsuarioDTO convertToDTO(Usuario usuario){
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         usuarioDTO.setPrimer_nombre(usuario.getPrimer_nombre());
@@ -34,6 +40,14 @@ public class UsuarioServiceImpl implements UsuarioService{
         usuarioDTO.setContrasena(usuario.getContrasena());
         usuarioDTO.setAdministrador(usuario.isAdministrador());
         return usuarioDTO;
+    }
+
+    public Preferencias convertToEntityP(PreferenciasDTO preferenciasDTO){
+        Preferencias preferencias = new Preferencias();
+        preferencias.setDiferencia_edad(preferenciasDTO.getDiferencia_edad());
+        preferencias.setHijos(preferenciasDTO.getHijos());
+        preferencias.setTipo_relacion(preferenciasDTO.getTipo_relacion());
+        return preferencias;
     }
 
     public static Usuario convertToEntity(UsuarioDTO usuarioDTO){
@@ -67,16 +81,15 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public List<Preferencias> findPreferenciasByUsuario(long id_usuario) {
-        return preferenciasDao.findPreferenciasByUsuario(id_usuario).stream()
-            .map(this::convertToDTO)
-            .collect(Collectors.toList());
-    }
+    public void ingresarPreferencias(long id_preferencias, long id_usuario) {
+        Usuario usuario = usuarioDao.findById(id_usuario)
+            .orElseThrow(() -> new RuntimeException( "Usuario con id "+ id_usuario + " no fue encontrado."));
+        Preferencias preferencias = preferenciasDao.findById(id_preferencias)
+            .orElseThrow(() -> new RuntimeException("Preferencias con id "+ id_preferencias + " no fueron encontradas."));
 
-    @Override
-    public void ingresarPreferencias(int id_preferencias, int id_usuario) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ingresarPreferencias'");
+        usuario.getPreferencias().add(preferencias);
+        preferencias.getUsuarios().add(usuario);
+        preferenciasDao.ingresarPreferencias(id_preferencias, id_usuario);
     }
 
     @Override

@@ -13,17 +13,17 @@ import jakarta.transaction.Transactional;
 @Repository
 public interface PreferenciasDao extends JpaRepository<Preferencias,Long>{
 
-    List<Preferencias> findByHijos(String hijos);
+    //List<Preferencias> findByHijos(String hijos);
 
-    List<Preferencias> findByDiferencia_edad(int diferencia_edad);
+    //List<Preferencias> findByDiferencia_edad(int diferencia_edad);
 
-    List<Preferencias> findByTipo_relacion(String tipo_relacion);
+    //List<Preferencias> findByTipo_relacion(String tipo_relacion);
 
     @Query("SELECT m FROM Preferencias m JOIN m.usuarios a WHERE a.id = :id_usuario")
-    List<Preferencias> findPreferenciasByUsuario(@Param("usuarioId") long id_usuario);
+    List<Preferencias> findPreferenciasByUsuario(@Param("id_usuario") long id_usuario);
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO preferencias_usuario (id_usuario, id_preferencias) VALUES (:idUsuario, :idPreferencias)", nativeQuery = true)
-    void ingresarPreferencias(@Param("id_preferencias") int id_preferencias, @Param("id_usuario") int id_usuario);
+    @Query(value = "INSERT INTO preferencias_usuario (id_usuario, id_preferencias) VALUES (:id_usuario, :id_preferencias)", nativeQuery = true)
+    void ingresarPreferencias(@Param("id_preferencias") long id_preferencias, @Param("id_usuario") long id_usuario);
 }

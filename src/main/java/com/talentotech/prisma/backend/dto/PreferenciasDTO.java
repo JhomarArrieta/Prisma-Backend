@@ -5,12 +5,12 @@ public class PreferenciasDTO {
     private long id;
     private String hijos;
     private String tipo_relacion;
-    private String diferencia_edad;
+    private int diferencia_edad;
     
     public PreferenciasDTO() {
     }
 
-    public PreferenciasDTO(long id, String hijos, String tipo_relacion, String diferencia_edad) {
+    public PreferenciasDTO(long id, String hijos, String tipo_relacion, int diferencia_edad) {
         this.id = id;
         this.hijos = hijos;
         this.tipo_relacion = tipo_relacion;
@@ -45,11 +45,11 @@ public class PreferenciasDTO {
         this.tipo_relacion = tipo_relacion;
     }
 
-    public String getDiferencia_edad() {
+    public int getDiferencia_edad() {
         return diferencia_edad;
     }
 
-    public void setDiferencia_edad(String diferencia_edad) {
+    public void setDiferencia_edad(int diferencia_edad) {
         this.diferencia_edad = diferencia_edad;
     }
 

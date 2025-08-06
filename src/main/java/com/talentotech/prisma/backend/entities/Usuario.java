@@ -63,7 +63,6 @@ public class Usuario{
         joinColumns = @JoinColumn(name = "id_usuario"),
         inverseJoinColumns = @JoinColumn(name = "id_preferencias")
     )
-       
     private Set<Preferencias> preferencias;
 
     public Usuario(){
@@ -174,11 +173,20 @@ public class Usuario{
         this.fecha_nacimiento = fecha_nacimiento;
     }
 
+    
     @Override
     public String toString() {
         return "Usuario [id=" + id + ", primer_nombre=" + primer_nombre + ", segundo_nombre=" + segundo_nombre
                 + ", primer_apellido=" + primer_apellido + ", segundo_apellido=" + segundo_apellido + ", ubicacion="
                 + ubicacion + ", email=" + email + ", contrasena=" + contrasena + ", administrador=" + administrador
                 + ", fecha_nacimiento=" + fecha_nacimiento + "]";
+    }
+
+    public Set<Preferencias> getPreferencias() {
+        return preferencias;
+    }
+
+    public void setPreferencias(Set<Preferencias> preferencias) {
+        this.preferencias = preferencias;
     }
 }
