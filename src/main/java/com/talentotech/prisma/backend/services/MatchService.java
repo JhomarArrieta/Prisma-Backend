@@ -17,8 +17,8 @@ public class MatchService {
     }
 
     public Match crearLike(Long idPersona1, Long idPersona2) {
-        
-        Match matchExistente = matchRepository.findByIdPersona1AndIdPersona2(idPersona1, idPersona2);
+
+        Match matchExistente = matchRepository.findMatchBetween(idPersona1, idPersona2);
 
         if (matchExistente != null){
             matchExistente.setEstado(true);
