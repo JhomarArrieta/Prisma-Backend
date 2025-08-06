@@ -44,7 +44,7 @@ public class Usuario{
     private String ubicacion;
 
     @Size(max = 50)
-    @Column(name = "email", length = 50)
+    @Column(name = "email", length = 50, unique = true)
     private String email;
 
     @Size(max = 50)
