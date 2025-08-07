@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.talentotech.prisma.backend.model.Match;
-import com.talentotech.prisma.backend.repository.MatchRepository;
+import com.talentotech.prisma.backend.entities.Match;
+import com.talentotech.prisma.backend.repositories.MatchRepository;
 
 @Service
 public class MatchService {

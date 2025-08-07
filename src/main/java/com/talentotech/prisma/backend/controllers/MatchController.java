@@ -1,4 +1,4 @@
-package com.talentotech.prisma.backend.controller;
+package com.talentotech.prisma.backend.controllers;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.talentotech.prisma.backend.model.Match;
+import com.talentotech.prisma.backend.entities.Match;
 import com.talentotech.prisma.backend.services.MatchService;
 
 @RestController

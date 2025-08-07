@@ -1,4 +1,4 @@
-package com.talentotech.prisma.backend.model;
+package com.talentotech.prisma.backend.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

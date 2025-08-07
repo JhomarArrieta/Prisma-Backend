@@ -1,14 +1,14 @@
-package com.talentotech.prisma.backend.repository;
+package com.talentotech.prisma.backend.repositories;
 
 import org.springframework.stereotype.Repository;
+
+import com.talentotech.prisma.backend.entities.Match;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
-import com.talentotech.prisma.backend.model.Match;
 
 @Repository
 public interface MatchRepository extends JpaRepository<Match, Long> {
