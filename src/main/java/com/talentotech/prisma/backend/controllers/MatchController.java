@@ -20,7 +20,6 @@ public class MatchController {
         this.matchService = matchService;
     }
 
-
     @PostMapping("/matches")
     public Match darLike(@RequestParam Long idPersona1, @RequestParam Long idPersona2) {
         return matchService.crearLike(idPersona1, idPersona2);

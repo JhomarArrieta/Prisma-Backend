@@ -5,35 +5,13 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.talentotech.prisma.backend.entities.Match;
-import com.talentotech.prisma.backend.repositories.MatchRepository;
 
 @Service
-public class MatchService {
-    
-    private final MatchRepository matchRepository;
+public interface MatchService {
+    Match crearLike(Long idPersona1, Long idPersona2);
 
-    public MatchService(MatchRepository matchRepository) {
-        this.matchRepository = matchRepository;
-    }
-
-    public Match crearLike(Long idPersona1, Long idPersona2) {
-
-        Match matchExistente = matchRepository.findMatchBetween(idPersona1, idPersona2);
-
-        if (matchExistente != null){
-            matchExistente.setEstado(true);
-            return matchRepository.save(matchExistente);
-        }
-
-        Match nuevoMatch = new Match();
-        nuevoMatch.setIdPersona1(idPersona1);
-        nuevoMatch.setIdPersona2(idPersona2);
-        nuevoMatch.setEstado(false);
-        return matchRepository.save(nuevoMatch);
-    }
-
-    public List<Match> obtenerMatchesPorPersona(Long idPersona) {
-        return matchRepository.findByIdPersona1OrIdPersona2(idPersona, idPersona);
-    }
-
+    List<Match> obtenerMatchesPorPersona(Long idPersona);
 }
+
+    
+
