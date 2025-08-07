@@ -14,16 +14,18 @@ import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
+@RequestMapping("/preferencias")
 public class PreferenciasController {
 
     @Autowired
     private PreferenciaService preferenciaService;
 
-    @PostMapping("/preferencias")
+    @PostMapping
     public ResponseEntity<PreferenciasDTO> ingresarPreferencias(@Valid @RequestBody PreferenciasDTO preferenciasDTO) {
         PreferenciasDTO guardada = preferenciaService.save(preferenciasDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(guardada);
@@ -34,7 +36,7 @@ public class PreferenciasController {
         return ResponseEntity.ok(preferenciaService.findPreferenciasByUsuario(id));
     }
 
-    @GetMapping("/preferencias")
+    @GetMapping
     public ResponseEntity<List<PreferenciasDTO>> obtenerPreferencias() {
         List<PreferenciasDTO> preferencias = preferenciaService.findAll();
         return ResponseEntity.ok(preferencias);

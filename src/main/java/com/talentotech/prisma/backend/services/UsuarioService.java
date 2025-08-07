@@ -11,8 +11,7 @@ public interface UsuarioService {
 
     UsuarioDTO crearUsuario(UsuarioDTO usuarioDTO);
     Optional<Usuario> obtenerUsuarioPorEmail(String email);
-    // List<PreferenciasDTO> findPreferenciasByUsuario(long id_usuario);
     void ingresarPreferencias(long id_preferencias, long id_usuario);
     Optional<Usuario> findById(long id);
-    
+    UsuarioDTO verificarUsuario(String email, String correo);
 }

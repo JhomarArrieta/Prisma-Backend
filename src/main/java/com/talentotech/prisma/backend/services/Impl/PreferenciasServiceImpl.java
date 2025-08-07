@@ -17,6 +17,7 @@ public class PreferenciasServiceImpl implements PreferenciaService{
 
     public Preferencias convertToEntityP(PreferenciasDTO preferenciasDTO){
         Preferencias preferencias = new Preferencias();
+        preferencias.setId(preferenciasDTO.getId());
         preferencias.setDiferencia_edad(preferenciasDTO.getDiferencia_edad());
         preferencias.setHijos(preferenciasDTO.getHijos());
         preferencias.setTipo_relacion(preferenciasDTO.getTipo_relacion());
@@ -25,6 +26,7 @@ public class PreferenciasServiceImpl implements PreferenciaService{
 
     public PreferenciasDTO convertToDTOP(Preferencias preferencias){
         PreferenciasDTO preferenciasDTO = new PreferenciasDTO();
+        preferenciasDTO.setId(preferencias.getId());
         preferenciasDTO.setDiferencia_edad(preferencias.getDiferencia_edad());
         preferenciasDTO.setHijos(preferencias.getHijos());
         preferenciasDTO.setTipo_relacion(preferencias.getTipo_relacion());

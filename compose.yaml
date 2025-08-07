@@ -43,8 +43,8 @@ services:
     ports:
       - 8080:8080
     environment:
-      - DB_PASSWORD=myappwd
-      - DB_USER=app_user
+      - DB_PASSWORD=example
+      - DB_USER=admin
       - DB_HOST=db
       - DB_NAME=appdb
       - DB_PORT=5432

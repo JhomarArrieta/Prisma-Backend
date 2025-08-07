@@ -2,6 +2,7 @@ package com.talentotech.prisma.backend.services.Impl;
 
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.talentotech.prisma.backend.dto.PreferenciasDTO;
 import com.talentotech.prisma.backend.dto.UsuarioDTO;
@@ -19,9 +20,13 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @Autowired
     private PreferenciasDao preferenciasDao;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     
     public PreferenciasDTO convertToDTOP(Preferencias preferencias){
         PreferenciasDTO preferenciasDTO = new PreferenciasDTO();
+        preferenciasDTO.setId(preferencias.getId());
         preferenciasDTO.setDiferencia_edad(preferencias.getDiferencia_edad());
         preferenciasDTO.setHijos(preferencias.getHijos());
         preferenciasDTO.setTipo_relacion(preferencias.getTipo_relacion());
@@ -30,6 +35,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     public static UsuarioDTO convertToDTO(Usuario usuario){
         UsuarioDTO usuarioDTO = new UsuarioDTO();
+        usuarioDTO.setId(usuario.getId());
         usuarioDTO.setPrimer_nombre(usuario.getPrimer_nombre());
         usuarioDTO.setSegundo_nombre(usuario.getSegundo_nombre());
         usuarioDTO.setPrimer_apellido(usuario.getPrimer_apellido());
@@ -37,13 +43,14 @@ public class UsuarioServiceImpl implements UsuarioService{
         usuarioDTO.setUbicacion(usuario.getUbicacion());
         usuarioDTO.setFecha_nacimiento(usuario.getFecha_nacimiento());
         usuarioDTO.setEmail(usuario.getEmail());
-        usuarioDTO.setContrasena(usuario.getContrasena());
+        usuarioDTO.setContrasena(null);
         usuarioDTO.setAdministrador(usuario.isAdministrador());
         return usuarioDTO;
     }
 
     public Preferencias convertToEntityP(PreferenciasDTO preferenciasDTO){
         Preferencias preferencias = new Preferencias();
+        preferencias.setId(preferenciasDTO.getId());
         preferencias.setDiferencia_edad(preferenciasDTO.getDiferencia_edad());
         preferencias.setHijos(preferenciasDTO.getHijos());
         preferencias.setTipo_relacion(preferenciasDTO.getTipo_relacion());
@@ -52,6 +59,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     public static Usuario convertToEntity(UsuarioDTO usuarioDTO){
         Usuario usuario = new Usuario();
+        usuario.setId(usuarioDTO.getId());
         usuario.setPrimer_nombre(usuarioDTO.getPrimer_nombre());
         usuario.setSegundo_nombre(usuarioDTO.getSegundo_nombre());
         usuario.setPrimer_apellido(usuarioDTO.getPrimer_apellido());
@@ -60,7 +68,7 @@ public class UsuarioServiceImpl implements UsuarioService{
         usuario.setFecha_nacimiento(usuario.getFecha_nacimiento());
         usuario.setEmail(usuarioDTO.getEmail());
         usuario.setContrasena(usuarioDTO.getContrasena());
-        usuario.setAdministrador(usuario.isAdministrador());
+        usuario.setAdministrador(false);
         return usuario;
     }
 
@@ -70,8 +78,13 @@ public class UsuarioServiceImpl implements UsuarioService{
             throw new UnsupportedOperationException("El usuario ya existe.");
         } else {
             Usuario usuarioEntidad = convertToEntity(usuarioDTO);
-            Usuario guardado = usuarioDao.save(usuarioEntidad);
-            return convertToDTO(guardado);
+            if(usuarioEntidad.getContrasena() != null && !usuarioEntidad.getContrasena().isEmpty()){
+                usuarioEntidad.setContrasena(passwordEncoder.encode(usuarioEntidad.getContrasena()));
+                Usuario guardado = usuarioDao.save(usuarioEntidad);
+                return convertToDTO(guardado);
+            } else {
+                throw new UnsupportedOperationException("El campo de la contraseña está vacío.");
+            }
         }
     }
 
@@ -95,6 +108,20 @@ public class UsuarioServiceImpl implements UsuarioService{
     @Override
     public Optional<Usuario> findById(long id) {
         return usuarioDao.findById(id);
+    }
+
+    @Override
+    public UsuarioDTO verificarUsuario(String email, String contraseña) {
+        if (obtenerUsuarioPorEmail(email).isPresent()){
+            Usuario usuario = usuarioDao.findUsuarioByEmail(email);
+            if (passwordEncoder.matches(usuario.getContrasena(), contraseña)){
+                return convertToDTO(usuario);
+            } else {
+                throw new UnsupportedOperationException("La contraseña es incorrecta.");
+            }
+        } else {
+            throw new UnsupportedOperationException("El usuario no existe.");
+        }
     }
 
 }   
