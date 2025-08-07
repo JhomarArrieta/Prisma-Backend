@@ -38,7 +38,7 @@ public class UsuarioServiceImpl implements UsuarioService{
         usuarioDTO.setFecha_nacimiento(usuario.getFecha_nacimiento());
         usuarioDTO.setEmail(usuario.getEmail());
         usuarioDTO.setContrasena(usuario.getContrasena());
-        usuarioDTO.setAdministrador(usuario.isAdministrador());
+        usuarioDTO.setAdministrador(false);
         return usuarioDTO;
     }
 
@@ -60,7 +60,7 @@ public class UsuarioServiceImpl implements UsuarioService{
         usuario.setFecha_nacimiento(usuario.getFecha_nacimiento());
         usuario.setEmail(usuarioDTO.getEmail());
         usuario.setContrasena(usuarioDTO.getContrasena());
-        usuario.setAdministrador(usuario.isAdministrador());
+        usuario.setAdministrador(false);
         return usuario;
     }
 
