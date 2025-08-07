@@ -111,10 +111,10 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public UsuarioDTO verificarUsuario(String email, String contraseña) {
+    public UsuarioDTO verificarUsuario(String email, String contrasena) {
         if (obtenerUsuarioPorEmail(email).isPresent()){
             Usuario usuario = usuarioDao.findUsuarioByEmail(email);
-            if (passwordEncoder.matches(usuario.getContrasena(), contraseña)){
+            if (passwordEncoder.matches(contrasena, usuario.getContrasena())){
                 return convertToDTO(usuario);
             } else {
                 throw new UnsupportedOperationException("La contraseña es incorrecta.");

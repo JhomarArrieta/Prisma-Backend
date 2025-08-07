@@ -1,13 +1,13 @@
 package com.talentotech.prisma.backend.dto;
 
 public class Login {
-    private String contrasena;
     private String email;
+    private String contrasena;
     
     public Login() {
     }
 
-    public Login(String contrasena, String email) {
+    public Login(String email, String contrasena) {
         this.contrasena = contrasena;
         this.email = email;
     }

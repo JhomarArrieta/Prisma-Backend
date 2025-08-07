@@ -41,9 +41,10 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authz -> authz
                         // Public endpoints - no authentication required
-                        .requestMatchers("/usuario/**").permitAll()
-                        .requestMatchers("/preferencias/**").permitAll() // Allow user registration
-                        .requestMatchers("/usuario").permitAll()
+                        // .requestMatchers("/usuario/**").permitAll()
+                        // .requestMatchers("/preferencias/**").permitAll() // Allow user registration
+                        // .requestMatchers("/usuario").permitAll()
+                        // .requestMatchers("/usuario/autenticar").permitAll()
 
                         // Protected endpoints - authentication required
                         // .requestMatchers("/api/materias/**").hasRole("USER")

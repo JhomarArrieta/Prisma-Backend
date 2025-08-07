@@ -13,16 +13,14 @@ Content-Type: application/json
   "primer_apellido": "Suero",
   "segundo_apellido": "Suiza",
   "ubicacion": "Medellín",
-  "email": "azullK",
+  "email": "azullKs",
   "contrasena": "123456",
-  "fecha_nacimiento": "2005-12-13",
-  "administrador": false
+  "fecha_nacimiento": "2005-12-13"
 }
 
 ###
 
-POST http://localhost:8080/usuario/1/agregar/1 HTTP/1.1
-Authorization: Bearer your_jwt_token_here
+POST http://localhost:8080/usuario/0/agregar/0 HTTP/1.1
 
 ###
 
@@ -39,10 +37,9 @@ Content-Type: application/json
 ###
 
 POST http://localhost:8080/usuario/autenticar
-Authorization: Bearer your_jwt_token_here
 Content-Type: application/json
 
 {
-  "email": "mily",
-  "contrasena": "sierra"
+  "email": "azullks",
+  "contrasena": "123456"
 }
