@@ -17,7 +17,7 @@ public class Perfil {
     
     @Id
     @Column(name = "id_usuario")
-    private Long id_usuario;
+    private long id_usuario;
 
     @Size(max = 100)
     @Column(name="descripcion", length = 100)
@@ -35,6 +35,9 @@ public class Perfil {
     @MapsId
     @Column(name="id_usuario")
     private Usuario usuario;
+
+    public Perfil() {
+    }
 
     public Perfil(Long id_usuario, @Size(max = 100) String descripcion, byte[] foto, List<String> gustos,
             Usuario usuario) {
