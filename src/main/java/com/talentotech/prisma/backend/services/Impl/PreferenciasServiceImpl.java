@@ -7,16 +7,17 @@ import org.springframework.stereotype.Service;
 import com.talentotech.prisma.backend.dto.PreferenciasDTO;
 import com.talentotech.prisma.backend.entities.Preferencias;
 import com.talentotech.prisma.backend.repositories.PreferenciasDao;
-import com.talentotech.prisma.backend.services.PreferenciaService;
+import com.talentotech.prisma.backend.services.PreferenciasService;
 
 @Service
-public class PreferenciasServiceImpl implements PreferenciaService{
+public class PreferenciasServiceImpl implements PreferenciasService{
 
     @Autowired
     public PreferenciasDao preferenciasDao;
 
     public Preferencias convertToEntityP(PreferenciasDTO preferenciasDTO){
         Preferencias preferencias = new Preferencias();
+        preferencias.setId(preferenciasDTO.getId());
         preferencias.setDiferencia_edad(preferenciasDTO.getDiferencia_edad());
         preferencias.setHijos(preferenciasDTO.getHijos());
         preferencias.setTipo_relacion(preferenciasDTO.getTipo_relacion());
@@ -25,6 +26,7 @@ public class PreferenciasServiceImpl implements PreferenciaService{
 
     public PreferenciasDTO convertToDTOP(Preferencias preferencias){
         PreferenciasDTO preferenciasDTO = new PreferenciasDTO();
+        preferenciasDTO.setId(preferencias.getId());
         preferenciasDTO.setDiferencia_edad(preferencias.getDiferencia_edad());
         preferenciasDTO.setHijos(preferencias.getHijos());
         preferenciasDTO.setTipo_relacion(preferencias.getTipo_relacion());
