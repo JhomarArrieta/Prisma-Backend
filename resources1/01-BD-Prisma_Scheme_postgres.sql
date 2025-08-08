@@ -17,7 +17,7 @@ CREATE TABLE usuario(
     ubicacion varchar(20),
     fecha_nacimiento Date,
     email varchar(50) UNIQUE NOT NULL,
-    contrasena varchar(50) NOT NULL,
+    contrasena varchar(244) NOT NULL,
     administrador BOOLEAN,
     PRIMARY KEY (id)
 );

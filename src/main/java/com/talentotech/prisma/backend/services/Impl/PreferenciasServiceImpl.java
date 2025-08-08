@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 import com.talentotech.prisma.backend.dto.PreferenciasDTO;
 import com.talentotech.prisma.backend.entities.Preferencias;
 import com.talentotech.prisma.backend.repositories.PreferenciasDao;
-import com.talentotech.prisma.backend.services.PreferenciaService;
+import com.talentotech.prisma.backend.services.PreferenciasService;
 
 @Service
-public class PreferenciasServiceImpl implements PreferenciaService{
+public class PreferenciasServiceImpl implements PreferenciasService{
 
     @Autowired
     public PreferenciasDao preferenciasDao;

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.talentotech.prisma.backend.dto.PreferenciasDTO;
 
-public interface PreferenciaService{
+public interface PreferenciasService{
 
     List<PreferenciasDTO> findAll();
     PreferenciasDTO save(PreferenciasDTO preferenciasDTO);
