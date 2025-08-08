@@ -8,4 +8,5 @@ import com.talentotech.prisma.backend.entities.Usuario;
 @Repository
 public interface UsuarioDao extends JpaRepository<Usuario, Long>{
     Optional<Usuario> findByEmail(String email);
+    Usuario findUsuarioByEmail(String email);
 }

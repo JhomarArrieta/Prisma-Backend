@@ -1,3 +1,5 @@
+BEGIN;
+
 CREATE TABLE preferencias(
     id SERIAL,
     hijos varchar(20),
@@ -14,8 +16,8 @@ CREATE TABLE usuario(
     segundo_apellido varchar(20),
     ubicacion varchar(20),
     fecha_nacimiento Date,
-    email varchar(50) UNIQUE,
-    contrasena varchar(50),
+    email varchar(50) UNIQUE NOT NULL,
+    contrasena varchar(244) NOT NULL,
     administrador BOOLEAN,
     PRIMARY KEY (id)
 );
@@ -57,6 +59,7 @@ CREATE TABLE match(
     PRIMARY KEY(id)
 );
 
+COMMIT;
 
 
 

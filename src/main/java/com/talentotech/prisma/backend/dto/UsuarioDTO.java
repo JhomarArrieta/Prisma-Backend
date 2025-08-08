@@ -11,7 +11,7 @@ public class UsuarioDTO{
     private String ubicacion;
     private String email;
     private String contrasena;
-    private boolean administrador;
+    private Boolean administrador;
     private LocalDate fecha_nacimiento;
 
     public UsuarioDTO(){
@@ -22,7 +22,7 @@ public class UsuarioDTO{
     }
 
     public UsuarioDTO(long id, String primer_nombre, String segundo_nombre, String primer_apellido, String segundo_apellido,
-            String ubicacion, String email, String contrasena, boolean administrador, LocalDate fecha_nacimiento) {
+            String ubicacion, String email, String contrasena, Boolean administrador, LocalDate fecha_nacimiento) {
         this.id = id;
         this.primer_nombre = primer_nombre;
         this.segundo_nombre = segundo_nombre;
@@ -120,11 +120,11 @@ public class UsuarioDTO{
         this.contrasena = contrasena;
     }
 
-    public boolean isAdministrador() {
+    public Boolean getAdministrador() {
         return administrador;
     }
 
-    public void setAdministrador(boolean administrador) {
+    public void setAdministrador(Boolean administrador) {
         this.administrador = administrador;
     }
 
