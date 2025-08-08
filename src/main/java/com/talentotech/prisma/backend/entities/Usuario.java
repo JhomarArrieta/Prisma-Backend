@@ -72,8 +72,7 @@ public class Usuario{
         this.id = id;
     }
 
-    public Usuario(long id, String primer_nombre, String segundo_nombre, String primer_apellido, String segundo_apellido,
-            String ubicacion, String email, String contrasena, Boolean administrador, LocalDate fecha_nacimiento) {
+    public Usuario(long id, String primer_nombre, String segundo_nombre, String primer_apellido, String segundo_apellido, String ubicacion, String email, String contrasena, Boolean administrador, LocalDate fecha_nacimiento) {
         this.id = id;
         this.primer_nombre = primer_nombre;
         this.segundo_nombre = segundo_nombre;
@@ -156,6 +155,7 @@ public class Usuario{
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
+
 
     public Boolean getAdministrador(){
         return administrador;
