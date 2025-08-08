@@ -13,8 +13,7 @@ Content-Type: application/json
   "primer_apellido": "Suero",
   "segundo_apellido": "Suiza",
   "ubicacion": "Medellín",
-  "email": "soto",
-  "email": "milifdsss",
+  "email": "azul",
   "contrasena": "123456",
   "fecha_nacimiento": "2005-12-13",
   "administrador": false
@@ -22,7 +21,7 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8080/api/usuario/1/agregar/1 HTTP/1.1
+POST http://localhost:8080/api/usuario/2/agregar/2 HTTP/1.1
 
 ###
 
@@ -40,7 +39,7 @@ POST http://localhost:8080/api/usuario/autenticar
 Content-Type: application/json
 
 {
-  "email": "milifdsss",
+  "email": "sotyo",
   "contrasena": "123456"
 }
 
@@ -49,4 +48,5 @@ Content-Type: application/json
 POST http://localhost:8080/api/usuario/filtrar/1
 Content-Type: application/json
 
-{}
+###
+GET http://localhost:8080/api/usuario/candidatos/1

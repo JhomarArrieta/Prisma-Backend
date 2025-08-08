@@ -5,15 +5,17 @@ public class UserCompleted {
     private String primer_apellido;
     private String ubicacion;
     private String tipo_relacion;
+    private String foto;
     
     public UserCompleted() {
     }
 
-    public UserCompleted(String primer_nombre, String primer_apellido, String ubicacion, String tipo_relacion) {
+    public UserCompleted(String primer_nombre, String primer_apellido, String ubicacion, String tipo_relacion, String foto) {
         this.primer_nombre = primer_nombre;
         this.primer_apellido = primer_apellido;
         this.ubicacion = ubicacion;
         this.tipo_relacion = tipo_relacion;
+        this.foto = foto;
     }
 
     public String getPrimer_nombre() {
@@ -48,5 +50,12 @@ public class UserCompleted {
         this.tipo_relacion = tipo_relacion;
     }
 
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 
 }

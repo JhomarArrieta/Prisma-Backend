@@ -91,8 +91,10 @@ public class UsuarioController{
         public ResponseEntity<Set<UserCompleted>> obtenerPosiblesMatches(@PathVariable long id_usuario){
             try{
                 Set<UsuarioDTO> candidatos = usuarioService.obtenerCandidatos(id_usuario);
-                return (ResponseEntity<Set<UserCompleted>>) usuarioService.obtenerInformacionCandidatos(candidatos);
+                Set<UserCompleted> info = usuarioService.obtenerInformacionCandidatos(candidatos);
+                return ResponseEntity.ok(info);
             } catch (Exception e){
+                e.printStackTrace();
                 return ResponseEntity.badRequest().build();
         }
     }

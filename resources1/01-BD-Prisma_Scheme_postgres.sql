@@ -26,7 +26,8 @@ CREATE TABLE preferencias_usuario(
     id_usuario INTEGER,
     id_preferencias INTEGER,
     CONSTRAINT FK_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id),
-    CONSTRAINT FK_preferencias FOREIGN KEY (id_preferencias) REFERENCES preferencias(id)
+    CONSTRAINT FK_preferencias FOREIGN KEY (id_preferencias) REFERENCES preferencias(id),
+    UNIQUE (id_usuario,id_preferencias)
 );
 
 CREATE TABLE perfil(

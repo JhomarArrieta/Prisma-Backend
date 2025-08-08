@@ -31,7 +31,7 @@ public class UsuarioServiceImpl implements UsuarioService{
     
     public PreferenciasDTO convertToDTOP(Preferencias preferencias){
         PreferenciasDTO preferenciasDTO = new PreferenciasDTO();
-        preferenciasDTO.setId(preferencias.getId());
+        //preferenciasDTO.setId(preferencias.getId());
         preferenciasDTO.setDiferencia_edad(preferencias.getDiferencia_edad());
         preferenciasDTO.setHijos(preferencias.getHijos());
         preferenciasDTO.setTipo_relacion(preferencias.getTipo_relacion());
@@ -164,6 +164,9 @@ public class UsuarioServiceImpl implements UsuarioService{
         List<Usuario> usuarios = usuarioDao.findAll();
         for(Usuario usuario : usuarios){
             PreferenciasDTO preferencias = findPreferenciasByUsuario(usuario.getId());
+            if (preferencias == null){
+                throw new UnsupportedOperationException("No existen preferencias para ese");
+            }
             if (preferenciasInteresado.getDiferencia_edad()==preferencias.getDiferencia_edad()
             || preferenciasInteresado.getHijos().equals(preferencias.getHijos())
             || preferenciasInteresado.getTipo_relacion().equals(preferencias.getTipo_relacion())){
