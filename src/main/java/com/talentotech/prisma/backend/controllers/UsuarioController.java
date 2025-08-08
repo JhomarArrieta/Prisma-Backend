@@ -56,6 +56,7 @@ public class UsuarioController{
 
                 if (usuarioDTO!=null){
                     String token = jwtUtil.generateToken(
+                        usuarioDTO.getId(),
                         usuarioDTO.getEmail(), 
                         usuarioDTO.getAdministrador()
                         );
