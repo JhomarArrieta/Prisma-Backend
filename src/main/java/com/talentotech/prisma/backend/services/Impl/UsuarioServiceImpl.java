@@ -1,10 +1,15 @@
 package com.talentotech.prisma.backend.services.Impl;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.talentotech.prisma.backend.dto.PreferenciasDTO;
+import com.talentotech.prisma.backend.dto.UserCompleted;
 import com.talentotech.prisma.backend.dto.UsuarioDTO;
 import com.talentotech.prisma.backend.entities.Preferencias;
 import com.talentotech.prisma.backend.entities.Usuario;
@@ -123,5 +128,82 @@ public class UsuarioServiceImpl implements UsuarioService{
             throw new UnsupportedOperationException("El usuario no existe.");
         }
     }
+
+    @Override
+    public void ingresarCandidatos(long id_interesado, long id_candidato) {
+        Usuario usuario1 = usuarioDao.findById(id_interesado)
+            .orElseThrow(() -> new RuntimeException("El interesado no existe"));
+        Usuario usuario2 = usuarioDao.findById(id_candidato)
+            .orElseThrow(() -> new RuntimeException("El candidato no existe"));
+
+        usuario1.getCandidatos().add(usuario2);
+        usuarioDao.ingresarPreferencias(id_interesado, id_candidato);
+    }
+
+    @Override
+    public Set<UsuarioDTO> obtenerCandidatos(long id_interesado) {
+        Usuario usuario = usuarioDao.findById(id_interesado)
+            .orElseThrow(() -> new RuntimeException("No existe el usuario."));
+
+        Set<UsuarioDTO> candidatosListos = new HashSet<>();
+        for(Usuario user : usuario.getCandidatos()){
+            candidatosListos.add(convertToDTO(user));
+        }
+        return candidatosListos;
+    }
+
+    public PreferenciasDTO findPreferenciasByUsuario(long id_usuario) {
+        return convertToDTOP(preferenciasDao.findPreferenciasByUsuario(id_usuario));
+    }
+
+    @Override
+    public void filtrar(long id_usuario) {
+        Usuario usuarioC = usuarioDao.findById(id_usuario)
+            .orElseThrow(() -> new RuntimeException("El usuario no existe"));
+        PreferenciasDTO preferenciasInteresado = findPreferenciasByUsuario(id_usuario);
+        List<Usuario> usuarios = usuarioDao.findAll();
+        for(Usuario usuario : usuarios){
+            PreferenciasDTO preferencias = findPreferenciasByUsuario(usuario.getId());
+            if (preferenciasInteresado.getDiferencia_edad()==preferencias.getDiferencia_edad()
+            || preferenciasInteresado.getHijos().equals(preferencias.getHijos())
+            || preferenciasInteresado.getTipo_relacion().equals(preferencias.getTipo_relacion())){
+                ingresarCandidatos(id_usuario, usuario.getId()); 
+            }
+            
+        }
+
+    }
+
+    @Override
+    public Set<UserCompleted> obtenerInformacionCandidatos(Set<UsuarioDTO> candidatos) {
+        Set<UserCompleted> informacionUsuarios = new HashSet<>();
+        for (UsuarioDTO usuarioDTO : candidatos){
+            UserCompleted usuarioCompleted = new UserCompleted();
+            if(usuarioDTO.getPrimer_nombre() != null){
+                usuarioCompleted.setPrimer_nombre(usuarioDTO.getPrimer_nombre());
+            }
+
+            if(usuarioDTO.getPrimer_apellido() != null){
+                usuarioCompleted.setPrimer_apellido(usuarioDTO.getPrimer_apellido());
+            }
+            
+            if(usuarioDTO.getUbicacion()!=null){
+                usuarioCompleted.setUbicacion(usuarioDTO.getUbicacion());
+            }
+            if(findPreferenciasByUsuario(usuarioDTO.getId()).getTipo_relacion() != null){
+                usuarioCompleted.setTipo_relacion(findPreferenciasByUsuario(usuarioDTO.getId()).getTipo_relacion());
+            }
+
+            informacionUsuarios.add(usuarioCompleted);
+        }
+
+        return informacionUsuarios;
+    }
+
+    
+
+    
+
+    
 
 }   

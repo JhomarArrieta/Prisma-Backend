@@ -13,7 +13,11 @@ Content-Type: application/json
   "primer_apellido": "Suero",
   "segundo_apellido": "Suiza",
   "ubicacion": "Medellín",
+<<<<<<< HEAD
   "email": "soto",
+=======
+  "email": "milisio",
+>>>>>>> posiblesMatches
   "contrasena": "123456",
   "fecha_nacimiento": "2005-12-13",
   "administrador": false
@@ -44,3 +48,11 @@ Content-Type: application/json
   "email": "soto",
   "contrasena": "123456"
 }
+<<<<<<< HEAD
+=======
+
+### 
+
+POST http://localhost:8080/usuario/filtrar/1
+Content-Type: application/json
+>>>>>>> posiblesMatches

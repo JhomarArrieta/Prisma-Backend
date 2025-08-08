@@ -1,5 +1,6 @@
-    package com.talentotech.prisma.backend.controllers;
+package com.talentotech.prisma.backend.controllers;
 
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,14 +30,73 @@ public class UsuarioController{
         @PostMapping
         public UsuarioDTO ingresarUsuario(@RequestBody UsuarioDTO usuario) {
             return usuarioService.crearUsuario(usuario);
-        }
+=======
+import java.util.Set;
 
-        @PostMapping("/{id_preferencias}/agregar/{id_usuario}")
-        public ResponseEntity<Void> personalizarUsuario(@PathVariable long id_preferencias, @PathVariable long id_usuario) {
-            usuarioService.ingresarPreferencias(id_preferencias, id_usuario);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        }
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
+import com.talentotech.prisma.backend.services.UsuarioService;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import com.talentotech.prisma.backend.dto.AuthResponse;
+import com.talentotech.prisma.backend.dto.Login;
+import com.talentotech.prisma.backend.dto.UserCompleted;
+import com.talentotech.prisma.backend.dto.UsuarioDTO;
+import com.talentotech.prisma.backend.security.JwtUtil;
+
+@RestController
+@CrossOrigin(origins = "*")
+public class UsuarioController{
+
+    @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
+    private JwtUtil jWtUtil;
+
+
+    @PostMapping("/usuario")
+    public UsuarioDTO ingresarUsuario(@RequestBody UsuarioDTO usuario) {
+        return usuarioService.crearUsuario(usuario);
+    }
+
+    @PostMapping("/{id_preferencias}/agregar/{id_usuario}")
+    public ResponseEntity<Void> personalizarUsuario(@PathVariable long id_preferencias, @PathVariable long id_usuario) {
+        usuarioService.ingresarPreferencias(id_preferencias, id_usuario);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PostMapping("/usuario/filtrar/{id_usuario}")
+    public ResponseEntity<Void> crearPosiblesMatches(@PathVariable long id_usuario){
+        usuarioService.filtrar(id_usuario);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @GetMapping("/usuario/candidatos/{id_usuario}")
+    public ResponseEntity<Set<UserCompleted>> obtenerPosiblesMatches(@PathVariable long id_usuario){
+        try{
+            Set<UsuarioDTO> candidatos = usuarioService.obtenerCandidatos(id_usuario);
+            return (ResponseEntity<Set<UserCompleted>>) usuarioService.obtenerInformacionCandidatos(candidatos);
+        } catch (Exception e){
+            return ResponseEntity.badRequest().build();
+>>>>>>> posiblesMatches
+        }
+    }
+
+    @PostMapping("/usuario/autenticar")
+    public ResponseEntity<AuthResponse> Autenticar(@RequestBody Login userLogin) {
+        try{
+            if(userLogin.getContrasena() == null || userLogin.getEmail() == null){
+                return ResponseEntity.badRequest().build();
+            }
+
+<<<<<<< HEAD
         @PostMapping("/autenticar")
         public ResponseEntity<AuthResponse> Autenticar(@RequestBody Login userLogin) {
             try{
@@ -59,13 +119,26 @@ public class UsuarioController{
                         token,
                         usuarioDTO.getEmail(),
                         usuarioDTO.getAdministrador()
+=======
+            UsuarioDTO usuarioDTO = usuarioService.verificarUsuario(
+                userLogin.getEmail(), 
+                userLogin.getContrasena()
+            );
+
+            if (usuarioDTO!=null){
+                String token = jWtUtil.generateToken(
+                    usuarioDTO.getEmail(), 
+                    usuarioDTO.getAdministrador()
+>>>>>>> posiblesMatches
                     );
 
-                    return ResponseEntity.ok(authResponse);
-                } else {
-                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-                }
+                AuthResponse authResponse = new AuthResponse(
+                    token,
+                    usuarioDTO.getEmail(),
+                    usuarioDTO.getAdministrador()
+                );
 
+<<<<<<< HEAD
             } catch (UnsupportedOperationException e) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             } catch (Exception e){
@@ -78,3 +151,18 @@ public class UsuarioController{
         
 
     }
+=======
+                return ResponseEntity.ok(authResponse);
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    
+    
+
+}
+>>>>>>> posiblesMatches
