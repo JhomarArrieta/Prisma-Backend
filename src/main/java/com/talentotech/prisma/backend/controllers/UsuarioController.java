@@ -9,13 +9,10 @@
     import org.springframework.web.bind.annotation.PathVariable;
     import org.springframework.web.bind.annotation.PostMapping;
     import org.springframework.web.bind.annotation.RequestBody;
-
     import com.talentotech.prisma.backend.dto.AuthResponse;
     import com.talentotech.prisma.backend.dto.Login;
     import com.talentotech.prisma.backend.dto.UsuarioDTO;
     import com.talentotech.prisma.backend.security.JwtUtil;
-    //import org.springframework.web.bind.annotation.GetMapping;
-
 
     @RestController
     @CrossOrigin(origins = "*")
