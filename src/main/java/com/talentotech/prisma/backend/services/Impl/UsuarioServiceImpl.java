@@ -65,7 +65,7 @@ public class UsuarioServiceImpl implements UsuarioService{
         usuario.setPrimer_apellido(usuarioDTO.getPrimer_apellido());
         usuario.setSegundo_apellido(usuarioDTO.getSegundo_apellido());
         usuario.setUbicacion(usuarioDTO.getUbicacion());
-        usuario.setFecha_nacimiento(usuario.getFecha_nacimiento());
+        usuario.setFecha_nacimiento(usuarioDTO.getFecha_nacimiento());
         usuario.setEmail(usuarioDTO.getEmail());
         usuario.setContrasena(usuarioDTO.getContrasena());
         usuario.setAdministrador(usuarioDTO.getAdministrador());
