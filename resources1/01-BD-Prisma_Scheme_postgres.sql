@@ -17,7 +17,7 @@ CREATE TABLE usuario(
     ubicacion varchar(20),
     fecha_nacimiento Date,
     email varchar(50) UNIQUE NOT NULL,
-    contrasena varchar(244) NOT NULL,
+    contrasena varchar(255) NOT NULL,
     administrador BOOLEAN,
     PRIMARY KEY (id)
 );
@@ -26,7 +26,8 @@ CREATE TABLE preferencias_usuario(
     id_usuario INTEGER,
     id_preferencias INTEGER,
     CONSTRAINT FK_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id),
-    CONSTRAINT FK_preferencias FOREIGN KEY (id_preferencias) REFERENCES preferencias(id)
+    CONSTRAINT FK_preferencias FOREIGN KEY (id_preferencias) REFERENCES preferencias(id),
+    UNIQUE (id_usuario,id_preferencias)
 );
 
 CREATE TABLE perfil(
@@ -47,6 +48,13 @@ CREATE TABLE mensajes(
     CONSTRAINT FK_destinatario FOREIGN KEY (id_destinatario) REFERENCES usuario(id),
     PRIMARY KEY (id)
 
+);
+
+CREATE TABLE candidatos(
+    id_interesado INTEGER,
+    id_candidato INTEGER,
+    CONSTRAINT FK_interesado FOREIGN KEY (id_interesado) REFERENCES usuario(id),
+    CONSTRAINT FK_candidato FOREIGN KEY (id_candidato) REFERENCES usuario(id)
 );
 
 CREATE TABLE match(

@@ -34,7 +34,7 @@ public class JwtUtil {
     }
 
     public Boolean extractIsAdmin(String token) {
-        return extractClaim(token, claims -> claims.get("isAdmin", Boolean.class));
+        return extractClaim(token, claims -> claims.get("administrador", Boolean.class));
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
@@ -54,10 +54,10 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 
-    public String generateToken(String username, Boolean isAdmin) {
+    public String generateToken(String email, Boolean isAdmin) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("isAdmin", isAdmin);
-        return createToken(claims, username);
+        claims.put("administrador", isAdmin);
+        return createToken(claims, email);
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
@@ -69,9 +69,9 @@ public class JwtUtil {
                 .signWith(getSigningKey())
                 .compact();
     }
-    public Boolean validateToken(String token, String username) {
+    public Boolean validateToken(String token, String email) {
         final String extractedUsername = extractUsername(token);
-        return (extractedUsername.equals(username) && !isTokenExpired(token));
+        return (extractedUsername.equals(email) && !isTokenExpired(token));
     }
 
     public Boolean validateToken(String token) {

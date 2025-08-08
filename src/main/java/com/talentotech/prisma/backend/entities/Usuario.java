@@ -2,7 +2,6 @@ package com.talentotech.prisma.backend.entities;
 
 import java.time.LocalDate;
 import java.util.Set;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -47,8 +46,8 @@ public class Usuario{
     @Column(name = "email", length = 50, unique = true)
     private String email;
 
-    @Size(max = 50)
-    @Column(name = "contrasena", length = 244)
+    @Size(max = 255)
+    @Column(name = "contrasena", length = 255)
     private String contrasena;
 
     @Column(name = "administrador")
@@ -64,6 +63,14 @@ public class Usuario{
         inverseJoinColumns = @JoinColumn(name = "id_preferencias")
     )
     private Set<Preferencias> preferencias;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name="candidatos",
+        joinColumns = @JoinColumn(name = "id_interesado"),
+        inverseJoinColumns = @JoinColumn(name = "id_candidato")
+    )
+    private Set<Usuario> candidatos;
 
     public Usuario(){
     }
@@ -189,4 +196,13 @@ public class Usuario{
     public void setPreferencias(Set<Preferencias> preferencias) {
         this.preferencias = preferencias;
     }
+
+    public Set<Usuario> getCandidatos() {
+        return candidatos;
+    }
+
+    public void setCandidatos(Set<Usuario> candidatos) {
+        this.candidatos = candidatos;
+    }
+
 }

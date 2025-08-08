@@ -48,9 +48,7 @@ public class PreferenciasServiceImpl implements PreferenciasService{
     }
 
     @Override
-    public List<PreferenciasDTO> findPreferenciasByUsuario(long id_usuario) {
-        return preferenciasDao.findPreferenciasByUsuario(id_usuario).stream()
-            .map(this::convertToDTOP)
-            .collect(Collectors.toList());
+    public PreferenciasDTO findPreferenciasByUsuario(long id_usuario) {
+        return convertToDTOP(preferenciasDao.findPreferenciasByUsuario(id_usuario));
     }
 }

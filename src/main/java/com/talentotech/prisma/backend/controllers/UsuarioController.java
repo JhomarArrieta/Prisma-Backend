@@ -1,31 +1,37 @@
-    package com.talentotech.prisma.backend.controllers;
+package com.talentotech.prisma.backend.controllers;
 
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.http.HttpStatus;
-    import org.springframework.http.ResponseEntity;
-    import org.springframework.web.bind.annotation.RestController;
-    import com.talentotech.prisma.backend.services.UsuarioService;
-    import org.springframework.web.bind.annotation.CrossOrigin;
-    import org.springframework.web.bind.annotation.PathVariable;
-    import org.springframework.web.bind.annotation.PostMapping;
-    import org.springframework.web.bind.annotation.RequestBody;
-    import com.talentotech.prisma.backend.dto.AuthResponse;
-    import com.talentotech.prisma.backend.dto.Login;
-    import com.talentotech.prisma.backend.dto.UsuarioDTO;
-    import com.talentotech.prisma.backend.security.JwtUtil;
+import java.util.Set;
 
-    @RestController
-    @CrossOrigin(origins = "*")
-    public class UsuarioController{
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
+import com.talentotech.prisma.backend.services.UsuarioService;
 
-        @Autowired
-        private UsuarioService usuarioService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-        @Autowired
-        private JwtUtil jWtUtil;
+import com.talentotech.prisma.backend.dto.AuthResponse;
+import com.talentotech.prisma.backend.dto.Login;
+import com.talentotech.prisma.backend.dto.UserCompleted;
+import com.talentotech.prisma.backend.dto.UsuarioDTO;
+import com.talentotech.prisma.backend.security.JwtUtil;
 
+//@CrossOrigin(origins = "*")
+@RestController
+@RequestMapping("/api/usuario")
+public class UsuarioController{
+    
+    @Autowired
+    private UsuarioService usuarioService;
+    
+    @Autowired
+    private JwtUtil jwtUtil;
 
-        @PostMapping("/usuario")
+        @PostMapping
         public UsuarioDTO ingresarUsuario(@RequestBody UsuarioDTO usuario) {
             return usuarioService.crearUsuario(usuario);
         }
@@ -36,7 +42,7 @@
             return ResponseEntity.status(HttpStatus.CREATED).build();
         }
 
-        @PostMapping("/usuario/autenticar")
+        @PostMapping("/autenticar")
         public ResponseEntity<AuthResponse> Autenticar(@RequestBody Login userLogin) {
             try{
                 if(userLogin.getContrasena() == null || userLogin.getEmail() == null){
@@ -49,7 +55,7 @@
                 );
 
                 if (usuarioDTO!=null){
-                    String token = jWtUtil.generateToken(
+                    String token = jwtUtil.generateToken(
                         usuarioDTO.getEmail(), 
                         usuarioDTO.getAdministrador()
                         );
@@ -65,11 +71,33 @@
                     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
                 }
 
+            } catch (UnsupportedOperationException e) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             } catch (Exception e){
+                e.printStackTrace(); // para ver el error en logs
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }
+
         }
-        
-        
+
+        @PostMapping("/filtrar/{id_usuario}")
+            public ResponseEntity<Void> crearPosiblesMatches(@PathVariable long id_usuario){
+            System.out.println("yiuyiuy");
+            usuarioService.filtrar(id_usuario);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        }
+
+        @GetMapping("/candidatos/{id_usuario}")
+        public ResponseEntity<Set<UserCompleted>> obtenerPosiblesMatches(@PathVariable long id_usuario){
+            try{
+                Set<UsuarioDTO> candidatos = usuarioService.obtenerCandidatos(id_usuario);
+                Set<UserCompleted> info = usuarioService.obtenerInformacionCandidatos(candidatos);
+                return ResponseEntity.ok(info);
+            } catch (Exception e){
+                e.printStackTrace();
+                return ResponseEntity.badRequest().build();
+        }
+    }
+
 
     }
