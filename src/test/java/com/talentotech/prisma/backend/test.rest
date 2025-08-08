@@ -13,34 +13,33 @@ Content-Type: application/json
   "primer_apellido": "Suero",
   "segundo_apellido": "Suiza",
   "ubicacion": "Medellín",
-  "email": "milisito",
+  "email": "soto",
   "contrasena": "123456",
   "fecha_nacimiento": "2005-12-13",
-  "administrador": true
+  "administrador": false
 }
 
 ###
 
-POST http://localhost:8080/1/agregar/1 HTTP/1.1
+POST http://localhost:8080/3/agregar/3 HTTP/1.1
 
 ###
 
 POST http://localhost:8080/preferencias HTTP/1.1
-Authorization: Bearer your_jwt_token_here
 Content-Type: application/json
 
 {
   "hijos": "sí",
-  "tipo_relacion": "Seria",
+  "tipo_relacion": "Nada",
   "diferencia_edad": 3
 }
 
 ###
 
-POST http://localhost:8080/usuario/autenticar
+POST http://localhost:8080/localhost:8080/usuario/autenticar
 Content-Type: application/json
 
 {
-  "email": "milisito",
+  "email": "soto",
   "contrasena": "123456"
 }

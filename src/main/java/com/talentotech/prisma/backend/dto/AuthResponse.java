@@ -3,16 +3,16 @@ package com.talentotech.prisma.backend.dto;
 public class AuthResponse {
     private String token;
     private String email;
-    private Boolean isAdmin;
+    private Boolean administrador;
     private String tokenType = "Bearer";
 
     public AuthResponse() {
     }
 
-    public AuthResponse(String token, String email, Boolean isAdmin) {
+    public AuthResponse(String token, String email, Boolean administrador) {
         this.token = token;
         this.email = email;
-        this.isAdmin = isAdmin;
+        this.administrador = administrador;
     }
 
     public String getToken() {
@@ -32,11 +32,11 @@ public class AuthResponse {
     }
 
     public Boolean getIsAdmin() {
-        return isAdmin;
+        return administrador;
     }
 
-    public void setIsAdmin(Boolean isAdmin) {
-        this.isAdmin = isAdmin;
+    public void setIsAdmin(Boolean administrador) {
+        this.administrador = administrador;
     }
 
     public String getTokenType() {
@@ -51,7 +51,7 @@ public class AuthResponse {
     public String toString() {
         return "AuthResponse{" +
                 "email='" + email + '\'' +
-                ", isAdmin=" + isAdmin +
+                ", administrador=" + administrador +
                 ", tokenType='" + tokenType + '\'' +
                 '}';
     }
