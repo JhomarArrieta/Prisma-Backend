@@ -6,20 +6,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import com.talentotech.prisma.backend.services.UsuarioService;
 
+//import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.talentotech.prisma.backend.dto.UsuarioDTO;
 
-
+//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@RequestMapping("/api/usuario")
 public class UsuarioController{
     
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping("/usuario")
+    @PostMapping
     public UsuarioDTO ingresarUsuario(@RequestBody UsuarioDTO usuario) {
+        System.out.println("fecha de nacimiento: " + usuario.getFecha_nacimiento());
         return usuarioService.crearUsuario(usuario);
     }
 
