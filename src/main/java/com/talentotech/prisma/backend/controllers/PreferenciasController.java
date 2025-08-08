@@ -28,7 +28,7 @@ public class PreferenciasController {
     }
 
     @GetMapping("/{id_usuario}/preferencias")
-    public ResponseEntity<List<PreferenciasDTO>> getPreferenciasByUsuario(@PathVariable long id) {
+    public ResponseEntity<PreferenciasDTO> getPreferenciasByUsuario(@PathVariable long id) {
         return ResponseEntity.ok(preferenciasService.findPreferenciasByUsuario(id));
     }
 

@@ -1,6 +1,5 @@
 package com.talentotech.prisma.backend.repositories;
 
-import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -20,7 +19,7 @@ public interface PreferenciasDao extends JpaRepository<Preferencias,Long>{
     //List<Preferencias> findByTipo_relacion(String tipo_relacion);
 
     @Query("SELECT m FROM Preferencias m JOIN m.usuarios a WHERE a.id = :id_usuario")
-    List<Preferencias> findPreferenciasByUsuario(@Param("id_usuario") long id_usuario);
+    Preferencias findPreferenciasByUsuario(@Param("id_usuario") long id_usuario);
 
     @Modifying
     @Transactional
