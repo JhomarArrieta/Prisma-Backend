@@ -90,6 +90,7 @@ public class UsuarioController{
         @GetMapping("/candidatos/{id_usuario}")
         public ResponseEntity<Set<UserCompleted>> obtenerPosiblesMatches(@PathVariable long id_usuario){
             try{
+                usuarioService.filtrar(id_usuario);
                 Set<UsuarioDTO> candidatos = usuarioService.obtenerCandidatos(id_usuario);
                 Set<UserCompleted> info = usuarioService.obtenerInformacionCandidatos(candidatos);
                 return ResponseEntity.ok(info);
