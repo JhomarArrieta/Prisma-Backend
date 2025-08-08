@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.talentotech.prisma.backend.dto.MatchInfoDTO;
 import com.talentotech.prisma.backend.entities.Match;
 import com.talentotech.prisma.backend.services.MatchService;
 
@@ -26,7 +27,7 @@ public class MatchController {
     }
 
     @GetMapping("/matches/persona/{idPersona}")
-    public List<Match> obtenerMatchesPorPersona(@PathVariable Long idPersona) {
+    public List<MatchInfoDTO> obtenerMatchesPorPersona(@PathVariable Long idPersona) { 
         return matchService.obtenerMatchesPorPersona(idPersona);
     }
 }
