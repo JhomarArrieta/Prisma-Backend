@@ -17,7 +17,7 @@ import com.talentotech.prisma.backend.dto.Login;
 import com.talentotech.prisma.backend.dto.UsuarioDTO;
 import com.talentotech.prisma.backend.security.JwtUtil;
 
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/usuario")
 public class UsuarioController{
@@ -26,7 +26,7 @@ public class UsuarioController{
     private UsuarioService usuarioService;
     
     @Autowired
-        private JwtUtil jWtUtil;
+    private JwtUtil jwtUtil;
 
         @PostMapping
         public UsuarioDTO ingresarUsuario(@RequestBody UsuarioDTO usuario) {
@@ -53,7 +53,7 @@ public class UsuarioController{
                 );
 
                 if (usuarioDTO!=null){
-                    String token = jWtUtil.generateToken(
+                    String token = jwtUtil.generateToken(
                         usuarioDTO.getEmail(), 
                         usuarioDTO.getAdministrador()
                         );
