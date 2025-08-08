@@ -44,6 +44,7 @@ public class SecurityConfig {
                         .requestMatchers("/preferencias").permitAll()
                         .requestMatchers("/usuario/autenticar").permitAll()
                         .requestMatchers("/usuario/**").permitAll()
+                        .requestMatchers("/api/**").permitAll()
 
                         // // Protected endpoints - authentication required
                         // .requestMatchers("/us").hasRole("USER")

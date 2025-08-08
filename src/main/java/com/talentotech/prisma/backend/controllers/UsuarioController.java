@@ -1,10 +1,14 @@
-    package com.talentotech.prisma.backend.controllers;
+package com.talentotech.prisma.backend.controllers;
+
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import com.talentotech.prisma.backend.services.UsuarioService;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.talentotech.prisma.backend.dto.AuthResponse;
 import com.talentotech.prisma.backend.dto.Login;
+import com.talentotech.prisma.backend.dto.UserCompleted;
 import com.talentotech.prisma.backend.dto.UsuarioDTO;
 import com.talentotech.prisma.backend.security.JwtUtil;
 
@@ -74,7 +79,23 @@ public class UsuarioController{
             }
 
         }
-        
-        
+
+        @PostMapping("/filtrar/{id_usuario}")
+            public ResponseEntity<Void> crearPosiblesMatches(@PathVariable long id_usuario){
+            System.out.println("yiuyiuy");
+            usuarioService.filtrar(id_usuario);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        }
+
+        @GetMapping("/candidatos/{id_usuario}")
+        public ResponseEntity<Set<UserCompleted>> obtenerPosiblesMatches(@PathVariable long id_usuario){
+            try{
+                Set<UsuarioDTO> candidatos = usuarioService.obtenerCandidatos(id_usuario);
+                return (ResponseEntity<Set<UserCompleted>>) usuarioService.obtenerInformacionCandidatos(candidatos);
+            } catch (Exception e){
+                return ResponseEntity.badRequest().build();
+        }
+    }
+
 
     }
