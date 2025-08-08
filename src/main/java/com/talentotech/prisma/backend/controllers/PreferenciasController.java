@@ -28,8 +28,8 @@ public class PreferenciasController {
     }
 
     @GetMapping("/{id_usuario}/preferencias")
-    public ResponseEntity<PreferenciasDTO> getPreferenciasByUsuario(@PathVariable long id) {
-        return ResponseEntity.ok(preferenciasService.findPreferenciasByUsuario(id));
+    public ResponseEntity<PreferenciasDTO> getPreferenciasByUsuario(@PathVariable long id_usuario) {
+        return ResponseEntity.ok(preferenciasService.findPreferenciasByUsuario(id_usuario));
     }
 
     @GetMapping

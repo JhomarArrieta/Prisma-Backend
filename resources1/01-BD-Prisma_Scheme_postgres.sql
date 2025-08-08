@@ -53,7 +53,7 @@ CREATE TABLE candidatos(
     id_interesado INTEGER,
     id_candidato INTEGER,
     CONSTRAINT FK_interesado FOREIGN KEY (id_interesado) REFERENCES usuario(id),
-    CONSTRAINT FK_candidato FOREIGN KEY (id_candidato) REFERENCES usuario(id),
+    CONSTRAINT FK_candidato FOREIGN KEY (id_candidato) REFERENCES usuario(id)
 );
 
 CREATE TABLE match(

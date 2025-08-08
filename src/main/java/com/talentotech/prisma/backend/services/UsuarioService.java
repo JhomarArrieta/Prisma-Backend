@@ -4,6 +4,7 @@ package com.talentotech.prisma.backend.services;
 import java.util.Optional;
 import java.util.Set;
 
+import com.talentotech.prisma.backend.dto.UserCompleted;
 // import com.talentotech.prisma.backend.dto.PreferenciasDTO;
 import com.talentotech.prisma.backend.dto.UsuarioDTO;
 import com.talentotech.prisma.backend.entities.Usuario;
@@ -18,5 +19,5 @@ public interface UsuarioService {
     void ingresarCandidatos(long id_interesado,long id_candidato);
     Set<UsuarioDTO> obtenerCandidatos(long id_interesado);
     void filtrar(long id_usuario);
-    Set<UsuarioDTO> obtenerInformacionCandidatos(Set<UsuarioDTO> candidatos);
+    Set<UserCompleted> obtenerInformacionCandidatos(Set<UsuarioDTO> candidatos);
 }
