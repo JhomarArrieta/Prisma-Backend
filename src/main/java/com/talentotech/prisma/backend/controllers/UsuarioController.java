@@ -69,11 +69,12 @@ public class UsuarioController{
                     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
                 }
 
+            } catch (UnsupportedOperationException e) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             } catch (Exception e){
+                e.printStackTrace(); // para ver el error en logs
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }
-        }
-        
-        
 
-    }
+        }
+}
