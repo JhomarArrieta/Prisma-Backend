@@ -3,10 +3,14 @@ package com.talentotech.prisma.backend.services.Impl;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.talentotech.prisma.backend.dto.PerfilDTO;
 import com.talentotech.prisma.backend.entities.Perfil;
 import com.talentotech.prisma.backend.repositories.PerfilDao;
 import com.talentotech.prisma.backend.services.PerfilService;
+
+@Service
 public class PerfilServiceImpl implements PerfilService{
 
     @Autowired
@@ -54,5 +58,16 @@ public class PerfilServiceImpl implements PerfilService{
         return convertToDTO(perfilActualizado);
         }
         return null;
+    }
+
+    @Override
+    public PerfilDTO encontrarPerfil(long id) {
+         if (perfilDao.findPerfilById(id).isPresent()){
+             PerfilDTO perfilDTO = convertToDTO(perfilDao.findPerfilById(id).get()); 
+             return perfilDTO;    
+        } else {
+            throw new UnsupportedOperationException("El perfil no existe.");
+        }
+         
     }
 }

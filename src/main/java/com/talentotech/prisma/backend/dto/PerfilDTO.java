@@ -5,7 +5,7 @@ import java.util.List;
 public class PerfilDTO {
     private String descripcion;
     private long id_usuario;
-    private byte[] foto;
+    private String foto;
     private List<String> gustos;
 
     
@@ -13,7 +13,7 @@ public class PerfilDTO {
     }
 
 
-    public PerfilDTO(String descripcion, long id_usuario, byte[] foto, List<String> gustos) {
+    public PerfilDTO(String descripcion, long id_usuario, String foto, List<String> gustos) {
         this.descripcion = descripcion;
         this.id_usuario = id_usuario;
         this.foto = foto;
@@ -52,12 +52,12 @@ public class PerfilDTO {
     }
 
 
-    public byte[] getFoto() {
+    public String getFoto() {
         return foto;
     }
 
 
-    public void setFoto(byte[] foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 

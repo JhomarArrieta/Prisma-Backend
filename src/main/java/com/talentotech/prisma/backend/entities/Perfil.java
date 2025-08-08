@@ -27,7 +27,7 @@ public class Perfil {
 
     @Lob
     @Column(name = "foto")
-    private byte[] foto;
+    private String foto;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(
@@ -39,13 +39,13 @@ public class Perfil {
 
     @OneToOne
     @MapsId
-    @Column(name="id_usuario")
+    @JoinColumn(name="id_usuario")
     private Usuario usuario;
 
     public Perfil() {
     }
 
-    public Perfil(Long id_usuario, @Size(max = 100) String descripcion, byte[] foto, List<String> gustos,
+    public Perfil(Long id_usuario, @Size(max = 100) String descripcion, String foto, List<String> gustos,
             Usuario usuario) {
         this.id_usuario = id_usuario;
         this.descripcion = descripcion;
@@ -70,11 +70,11 @@ public class Perfil {
         this.descripcion = descripcion;
     }
 
-    public byte[] getFoto() {
+    public String getFoto() {
         return foto;
     }
 
-    public void setFoto(byte[] foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 
