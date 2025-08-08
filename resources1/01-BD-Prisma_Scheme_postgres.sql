@@ -1,3 +1,5 @@
+BEGIN;
+
 CREATE TABLE preferencias(
     id SERIAL,
     hijos varchar(20),
@@ -12,11 +14,11 @@ CREATE TABLE usuario(
     segundo_nombre varchar(20),
     primer_apellido varchar(20) NOT NULL,
     segundo_apellido varchar(20),
-    id_preferencias INTEGER,
     ubicacion varchar(20),
     fecha_nacimiento Date,
-    email varchar(50),
-    contrasena varchar(50),
+    email varchar(50) UNIQUE NOT NULL,
+    contrasena varchar(244) NOT NULL,
+    administrador BOOLEAN,
     PRIMARY KEY (id)
 );
 
@@ -25,9 +27,14 @@ CREATE TABLE preferencias_usuario(
     id_preferencias INTEGER,
     CONSTRAINT FK_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id),
     CONSTRAINT FK_preferencias FOREIGN KEY (id_preferencias) REFERENCES preferencias(id)
-
 );
 
+CREATE TABLE perfil(
+    id_usuario INTEGER,
+    ocupacion varchar(50),
+    descripcion varchar(100),
+    CONSTRAINT FK_perfil FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+);
 
 CREATE TABLE mensajes(
     id SERIAL,
@@ -52,6 +59,7 @@ CREATE TABLE match(
     PRIMARY KEY(id)
 );
 
+COMMIT;
 
 
 

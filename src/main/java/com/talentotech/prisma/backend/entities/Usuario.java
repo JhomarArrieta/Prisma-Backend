@@ -48,7 +48,7 @@ public class Usuario{
     private String email;
 
     @Size(max = 50)
-    @Column(name = "contrasena", length = 50)
+    @Column(name = "contrasena", length = 244)
     private String contrasena;
 
     @Column(name = "administrador")
@@ -72,8 +72,7 @@ public class Usuario{
         this.id = id;
     }
 
-    public Usuario(long id, String primer_nombre, String segundo_nombre, String primer_apellido, String segundo_apellido,
-            String ubicacion, String email, String contrasena, boolean administrador, LocalDate fecha_nacimiento) {
+    public Usuario(long id, String primer_nombre, String segundo_nombre, String primer_apellido, String segundo_apellido, String ubicacion, String email, String contrasena, Boolean administrador, LocalDate fecha_nacimiento) {
         this.id = id;
         this.primer_nombre = primer_nombre;
         this.segundo_nombre = segundo_nombre;
@@ -157,11 +156,12 @@ public class Usuario{
         this.contrasena = contrasena;
     }
 
-    public boolean isAdministrador() {
+
+    public Boolean getAdministrador(){
         return administrador;
     }
 
-    public void setAdministrador(boolean administrador) {
+    public void setAdministrador(Boolean administrador) {
         this.administrador = administrador;
     }
 

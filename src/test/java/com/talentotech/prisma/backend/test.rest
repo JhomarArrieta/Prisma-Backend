@@ -1,0 +1,46 @@
+# @SERVER=localhost
+# @PORT=8080
+# @BASE_URL=http://{{SERVER}}:{{PORT}}
+
+###
+
+POST http://localhost:8080/usuario HTTP/1.1
+Content-Type: application/json
+
+{
+  "primer_nombre": "ssjbdsjmhks",
+  "segundo_nombre": "Jshhjs",
+  "primer_apellido": "Suero",
+  "segundo_apellido": "Suiza",
+  "ubicacion": "Medellín",
+  "email": "milisito",
+  "contrasena": "123456",
+  "fecha_nacimiento": "2005-12-13",
+  "administrador": true
+}
+
+###
+
+POST http://localhost:8080/1/agregar/1 HTTP/1.1
+
+###
+
+POST http://localhost:8080/preferencias HTTP/1.1
+Authorization: Bearer your_jwt_token_here
+Content-Type: application/json
+
+{
+  "hijos": "sí",
+  "tipo_relacion": "Seria",
+  "diferencia_edad": 3
+}
+
+###
+
+POST http://localhost:8080/usuario/autenticar
+Content-Type: application/json
+
+{
+  "email": "milisito",
+  "contrasena": "123456"
+}
