@@ -8,5 +8,5 @@ public interface PreferenciasService{
 
     List<PreferenciasDTO> findAll();
     PreferenciasDTO save(PreferenciasDTO preferenciasDTO);
-    List<PreferenciasDTO> findPreferenciasByUsuario(long id_usuario);
+    PreferenciasDTO findPreferenciasByUsuario(long id_usuario);
 }
