@@ -1,31 +1,32 @@
     package com.talentotech.prisma.backend.controllers;
 
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.http.HttpStatus;
-    import org.springframework.http.ResponseEntity;
-    import org.springframework.web.bind.annotation.RestController;
-    import com.talentotech.prisma.backend.services.UsuarioService;
-    import org.springframework.web.bind.annotation.CrossOrigin;
-    import org.springframework.web.bind.annotation.PathVariable;
-    import org.springframework.web.bind.annotation.PostMapping;
-    import org.springframework.web.bind.annotation.RequestBody;
-    import com.talentotech.prisma.backend.dto.AuthResponse;
-    import com.talentotech.prisma.backend.dto.Login;
-    import com.talentotech.prisma.backend.dto.UsuarioDTO;
-    import com.talentotech.prisma.backend.security.JwtUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
+import com.talentotech.prisma.backend.services.UsuarioService;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-    @RestController
-    @CrossOrigin(origins = "*")
-    public class UsuarioController{
+import com.talentotech.prisma.backend.dto.AuthResponse;
+import com.talentotech.prisma.backend.dto.Login;
+import com.talentotech.prisma.backend.dto.UsuarioDTO;
+import com.talentotech.prisma.backend.security.JwtUtil;
 
-        @Autowired
-        private UsuarioService usuarioService;
+//@CrossOrigin(origins = "*")
+@RestController
+@RequestMapping("/api/usuario")
+public class UsuarioController{
+    
+    @Autowired
+    private UsuarioService usuarioService;
+    
+    @Autowired
+    private JwtUtil jwtUtil;
 
-        @Autowired
-        private JwtUtil jWtUtil;
-
-
-        @PostMapping("/usuario")
+        @PostMapping
         public UsuarioDTO ingresarUsuario(@RequestBody UsuarioDTO usuario) {
             return usuarioService.crearUsuario(usuario);
         }
@@ -36,7 +37,7 @@
             return ResponseEntity.status(HttpStatus.CREATED).build();
         }
 
-        @PostMapping("/usuario/autenticar")
+        @PostMapping("/autenticar")
         public ResponseEntity<AuthResponse> Autenticar(@RequestBody Login userLogin) {
             try{
                 if(userLogin.getContrasena() == null || userLogin.getEmail() == null){
@@ -49,7 +50,7 @@
                 );
 
                 if (usuarioDTO!=null){
-                    String token = jWtUtil.generateToken(
+                    String token = jwtUtil.generateToken(
                         usuarioDTO.getEmail(), 
                         usuarioDTO.getAdministrador()
                         );

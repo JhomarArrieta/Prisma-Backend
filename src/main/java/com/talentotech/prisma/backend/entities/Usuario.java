@@ -47,8 +47,8 @@ public class Usuario{
     @Column(name = "email", length = 50, unique = true)
     private String email;
 
-    @Size(max = 244)
-    @Column(name = "contrasena", length = 244)
+    @Size(max = 255)
+    @Column(name = "contrasena", length = 255)
     private String contrasena;
 
     @Column(name = "administrador")
