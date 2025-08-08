@@ -13,14 +13,15 @@ Content-Type: application/json
   "primer_apellido": "Suero",
   "segundo_apellido": "Suiza",
   "ubicacion": "Medellín",
-  "email": "azullKs",
+  "email": "milisito",
   "contrasena": "123456",
-  "fecha_nacimiento": "2005-12-13"
+  "fecha_nacimiento": "2005-12-13",
+  "administrador": true
 }
 
 ###
 
-POST http://localhost:8080/usuario/0/agregar/0 HTTP/1.1
+POST http://localhost:8080/1/agregar/1 HTTP/1.1
 
 ###
 
@@ -40,6 +41,6 @@ POST http://localhost:8080/usuario/autenticar
 Content-Type: application/json
 
 {
-  "email": "azullks",
+  "email": "milisito",
   "contrasena": "123456"
 }

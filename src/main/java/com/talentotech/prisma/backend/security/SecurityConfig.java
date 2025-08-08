@@ -41,13 +41,13 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authz -> authz
                         // Public endpoints - no authentication required
-                        // .requestMatchers("/usuario/**").permitAll()
-                        // .requestMatchers("/preferencias/**").permitAll() // Allow user registration
-                        // .requestMatchers("/usuario").permitAll()
-                        // .requestMatchers("/usuario/autenticar").permitAll()
+                        .requestMatchers("/usuario").permitAll()
+                        .requestMatchers("/preferencias").permitAll()
+                        .requestMatchers("/usuario/autenticar").permitAll()
+                        .requestMatchers("/usuario/**").permitAll()
 
-                        // Protected endpoints - authentication required
-                        // .requestMatchers("/api/materias/**").hasRole("USER")
+                        // // Protected endpoints - authentication required
+                        // .requestMatchers("/us").hasRole("USER")
 
                         // // Admin only endpoints
                         // .requestMatchers("/api/alumnos/**").hasRole("ADMIN")

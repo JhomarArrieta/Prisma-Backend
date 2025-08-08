@@ -52,7 +52,7 @@ public class Usuario{
     private String contrasena;
 
     @Column(name = "administrador")
-    private boolean administrador;
+    private Boolean administrador;
 
     @Column(name = "fecha_nacimiento")
     private LocalDate fecha_nacimiento;
@@ -73,7 +73,7 @@ public class Usuario{
     }
 
     public Usuario(long id, String primer_nombre, String segundo_nombre, String primer_apellido, String segundo_apellido,
-            String ubicacion, String email, String contrasena, boolean administrador, LocalDate fecha_nacimiento) {
+            String ubicacion, String email, String contrasena, Boolean administrador, LocalDate fecha_nacimiento) {
         this.id = id;
         this.primer_nombre = primer_nombre;
         this.segundo_nombre = segundo_nombre;
@@ -157,11 +157,11 @@ public class Usuario{
         this.contrasena = contrasena;
     }
 
-    public boolean isAdministrador() {
+    public Boolean getAdministrador(){
         return administrador;
     }
 
-    public void setAdministrador(boolean administrador) {
+    public void setAdministrador(Boolean administrador) {
         this.administrador = administrador;
     }
 
