@@ -1,7 +1,7 @@
 package com.talentotech.prisma.backend.controllers;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,16 +22,16 @@ public class PerfilController {
 
     @PostMapping("/perfil")
     public ResponseEntity<PerfilDTO> guardarPerfil(
-        @RequestParam("id_usuario") long id_usuario,
-        @RequestParam("descripcion") String descripcion,
-        @RequestParam("foto") MultipartFile foto,
-        @RequestParam("gustos") List<String> gustos) throws IOException {
-        
+        @RequestParam(value = "id_usuario") long id_usuario,
+        @RequestParam(value="descripcion", required = false) String descripcion,
+        @RequestParam(value="foto", required= false) MultipartFile foto,
+        @RequestParam(value="gustos", required=false) String[] gustos) throws IOException {
+            
             PerfilDTO perfilDTO = new PerfilDTO();
             perfilDTO.setId_usuario(id_usuario);
             perfilDTO.setDescripcion(descripcion);
             perfilDTO.setFoto(foto.getBytes());
-            perfilDTO.setGustos(gustos);
+            perfilDTO.setGustos(Arrays.asList(gustos));
 
             PerfilDTO guardado = perfilService.guardarPerfil(perfilDTO);
             return ResponseEntity.ok(guardado);

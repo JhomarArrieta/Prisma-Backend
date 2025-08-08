@@ -2,11 +2,13 @@ package com.talentotech.prisma.backend.entities;
 
 import java.util.List;
 
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
@@ -28,7 +30,11 @@ public class Perfil {
     private byte[] foto;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @Column(name = "gustos")
+    @CollectionTable(
+        name = "gustos_perfil",
+        joinColumns = @JoinColumn(name = "perfil_id")
+    )
+    @Column(name = "gusto")
     private List<String> gustos;
 
     @OneToOne

@@ -35,6 +35,12 @@ CREATE TABLE perfil(
     PRIMARY KEY(id_usuario)
 );
 
+CREATE TABLE gustos_perfil (
+    perfil_id BIGINT NOT NULL,
+    gusto varchar(30),
+    CONSTRAINT fk_perfil FOREIGN KEY (perfil_id) REFERENCES perfil(id_usuario)
+);
+
 CREATE TABLE mensajes(
     id SERIAL,
     id_remitente INTEGER,
@@ -57,6 +63,8 @@ CREATE TABLE match(
     CONSTRAINT FK_persona2 FOREIGN KEY (id_persona2) REFERENCES usuario(id),
     PRIMARY KEY(id)
 );
+
+
 
 
 

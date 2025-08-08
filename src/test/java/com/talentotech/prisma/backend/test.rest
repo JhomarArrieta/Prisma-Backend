@@ -13,7 +13,7 @@ Content-Type: application/json
   "primer_apellido": "Suero",
   "segundo_apellido": "Suiza",
   "ubicacion": "Medellín",
-  "email": "azul",
+  "email": "azusl",
   "contrasena": "123456",
   "fecha_nacimiento": "2005-12-13",
   "administrador": false
