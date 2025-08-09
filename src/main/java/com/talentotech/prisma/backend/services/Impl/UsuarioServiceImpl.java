@@ -50,6 +50,8 @@ public class UsuarioServiceImpl implements UsuarioService{
         usuarioDTO.setEmail(usuario.getEmail());
         usuarioDTO.setContrasena(null);
         usuarioDTO.setAdministrador(usuario.getAdministrador());
+        usuarioDTO.setContrasena(usuario.getContrasena());
+        usuarioDTO.setAdministrador(false);
         return usuarioDTO;
     }
 
@@ -74,6 +76,7 @@ public class UsuarioServiceImpl implements UsuarioService{
         usuario.setEmail(usuarioDTO.getEmail());
         usuario.setContrasena(usuarioDTO.getContrasena());
         usuario.setAdministrador(usuarioDTO.getAdministrador());
+        usuario.setAdministrador(false);
         return usuario;
     }
 

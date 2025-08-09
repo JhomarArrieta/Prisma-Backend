@@ -32,9 +32,16 @@ CREATE TABLE preferencias_usuario(
 
 CREATE TABLE perfil(
     id_usuario INTEGER,
-    ocupacion varchar(50),
+    foto BYTEA,
     descripcion varchar(100),
-    CONSTRAINT FK_perfil FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+    CONSTRAINT FK_perfil FOREIGN KEY (id_usuario) REFERENCES usuario(id),
+    PRIMARY KEY(id_usuario)
+);
+
+CREATE TABLE gustos_perfil (
+    perfil_id BIGINT NOT NULL,
+    gusto varchar(30),
+    CONSTRAINT fk_perfil FOREIGN KEY (perfil_id) REFERENCES perfil(id_usuario)
 );
 
 CREATE TABLE mensajes(
@@ -68,6 +75,8 @@ CREATE TABLE match(
 );
 
 COMMIT;
+
+
 
 
 
