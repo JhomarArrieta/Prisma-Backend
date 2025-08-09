@@ -1,0 +1,98 @@
+package com.talentotech.prisma.backend.entities;
+
+import java.util.List;
+
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.Size;
+
+@Entity
+public class Perfil {
+    
+    @Id
+    @Column(name = "id_usuario")
+    private long id_usuario;
+
+    @Size(max = 100)
+    @Column(name="descripcion", length = 100)
+    private String descripcion;
+
+    @Lob
+    @Column(name = "foto")
+    private String foto;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(
+        name = "gustos_perfil",
+        joinColumns = @JoinColumn(name = "perfil_id")
+    )
+    @Column(name = "gusto")
+    private List<String> gustos;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name="id_usuario")
+    private Usuario usuario;
+
+    public Perfil() {
+    }
+
+    public Perfil(Long id_usuario, @Size(max = 100) String descripcion, String foto, List<String> gustos,
+            Usuario usuario) {
+        this.id_usuario = id_usuario;
+        this.descripcion = descripcion;
+        this.foto = foto;
+        this.gustos = gustos;
+        this.usuario = usuario;
+    }
+
+    public Long getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(Long id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public List<String> getGustos() {
+        return gustos;
+    }
+
+    public void setGustos(List<String> gustos) {
+        this.gustos = gustos;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    
+}
