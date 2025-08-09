@@ -37,6 +37,10 @@ public class JwtUtil {
         return extractClaim(token, claims -> claims.get("administrador", Boolean.class));
     }
 
+    public Long extractId(String token) {
+        return extractClaim(token, claims -> claims.get("id", Long.class));
+    }
+
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
@@ -54,9 +58,10 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 
-    public String generateToken(String email, Boolean isAdmin) {
+    public String generateToken(Long id_usuario,String email, Boolean isAdmin) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("administrador", isAdmin);
+        claims.put("id", id_usuario);
         return createToken(claims, email);
     }
 
