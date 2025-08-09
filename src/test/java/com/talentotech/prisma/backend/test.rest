@@ -13,7 +13,7 @@ Content-Type: application/json
   "primer_apellido": "Suero",
   "segundo_apellido": "Suiza",
   "ubicacion": "Medellín",
-  "email": "azusl",
+  "email": "azusal",
   "contrasena": "123456",
   "fecha_nacimiento": "2005-12-13",
   "administrador": false
@@ -32,4 +32,14 @@ Content-Type: application/json
   "hijos": "sí",
   "tipo_relacion": "Seria",
   "diferencia_edad": 3
+}
+
+###
+
+POST http://localhost:8080/perfil HTTP/1.1
+Content-Type: application/json
+
+{
+  "id_usuario": 1,
+   "descripcion": "hola"
 }

@@ -62,8 +62,8 @@ public class PerfilServiceImpl implements PerfilService{
 
     @Override
     public PerfilDTO encontrarPerfil(long id) {
-         if (perfilDao.findPerfilById(id).isPresent()){
-             PerfilDTO perfilDTO = convertToDTO(perfilDao.findPerfilById(id).get()); 
+         if (perfilDao.findPerfilById_usuario(id).isPresent()){
+             PerfilDTO perfilDTO = convertToDTO(perfilDao.findPerfilById_usuario(id).get()); 
              return perfilDTO;    
         } else {
             throw new UnsupportedOperationException("El perfil no existe.");
